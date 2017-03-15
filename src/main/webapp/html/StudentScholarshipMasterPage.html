@@ -45,6 +45,76 @@
 				</form>
 			</div>
 		</nav>
+		<div class="container-fluid text-center">    
+			<div class="row content">
+				<div class="col-sm-2 sidenav nav-fill">
+					<nav class="nav flex-column nav-pills nav-fill">
+						<a class="nav-link active" href="#studentBasicDetailsTab">Basic Details</a>
+						<a class="nav-link" href="#studentFamilyDetailsTab">Family Details</a>
+						<a class="nav-link" href="#studentBankAccountDetailsTab">Bank Account Details</a>
+						<a class="nav-link disabled" href="#">Disabled</a>
+					</nav>
+				</div>
+				<div class="col-sm-10 text-left" id="studentBasicDetailsTab"> 
+					<div>
+						<h2>Student Basic Details</h2>
+						<form id="studentBasicForm" role="form">
+							<div class="form-group row" id="firstRow">
+								<div class="col-sm-4">
+									<label for="studentFirstName">First Name</label>
+									<input class="form-control" id="studentFirstName" type="text">
+								</div>
+								<div class="col-sm-4">
+									<label for="studentMiddleName">Middle Name</label>
+									<input class="form-control" id="studentMiddleName" type="text">
+								</div>
+								<div class="col-sm-4">
+									<label for="studentLastName">Last Name</label>
+									<input class="form-control" id="studentLastName" type="text">
+								</div>
+							</div>
+							
+							<div class="form-group row" id="secondRow">
+								<div class="col-sm-4">
+									<label for="studentMobileNo">Mobile Number</label>
+									<input class="form-control" id="studentMobileNo" type="tel" placeholder="1234567890" data-inputmask="'alias': 'phone'">
+									<!--<input class="form-control" id="studentMobileNo" type="tel" placeholder="+91 (123)456-7890" pattern="[\+]\d{2}[\(]\d{3}[\)]\d{3}[\-]\d{4}">-->
+								</div>
+								<div class="col-sm-4">
+									<label for="studentAltContactNo">Alternate Contact Number</label>
+									<input class="form-control" id="studentAltContactNo" type="tel" maxlength="10">
+								</div>
+								<div class="col-sm-4">
+									<label for="studentResidenceTelephoneNo">Residence Telephone Number</label>
+									<input class="form-control" id="studentResidenceTelephoneNo" type="number">
+								</div>
+							</div>
+							
+							<div class="form-group row" id="thirdRow">
+								<div class="col-sm-6">
+
+								</div>
+								<div class="col-sm-2">
+									<button type="button" id="btnClear" class="form-control btn btn-secondary">Clear</button>
+								</div>
+								<div class="col-sm-2">
+									<button type="button" id="btnSave" class="form-control btn btn-primary">Save</button>
+								</div>
+								<div class="col-sm-2">
+									<button type="button" id="btnSaveContinue" class="form-control btn btn-primary">Save & Continue</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="col-sm-10 text-left" id="studentFamilyDetailsTab"> 
+					<div>
+						<h2>Family Details</h2>
+						
+					</div>
+				</div>
+			</div>
+		</div>
 		<script src="../js/jquery-3.1.1.js"></script>
 		<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
     	<script src="../js/bootstrap-4.0.0.js"></script>
