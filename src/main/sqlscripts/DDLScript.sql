@@ -144,3 +144,12 @@ CREATE TABLE Student_Application
         FOREIGN KEY (Student_Curriculum_Record_ID) REFERENCES Student_Curriculum_Record(id),
         FOREIGN KEY (File_ID) REFERENCES Student_File(id)
 	);
+    
+----------------------------------------------------
+-- 16th Mar 2017    
+ALTER TABLE Student_File MODIFY COLUMN id INT AUTO_INCREMENT;
+ALTER TABLE Student_File AUTO_INCREMENT=1001;
+
+ALTER TABLE Entity_Details MODIFY COLUMN id INT AUTO_INCREMENT;
+ALTER TABLE Entity_Details AUTO_INCREMENT=1001;
+ALTER TABLE Entity_Details MODIFY Reference_Entity_ID INT NULL;
