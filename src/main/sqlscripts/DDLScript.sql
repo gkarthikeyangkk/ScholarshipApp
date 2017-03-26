@@ -148,8 +148,34 @@ CREATE TABLE Student_Application
 ----------------------------------------------------
 -- 16th Mar 2017    
 ALTER TABLE Student_File MODIFY COLUMN id INT AUTO_INCREMENT;
-ALTER TABLE Student_File AUTO_INCREMENT=0;
+ALTER TABLE Student_File AUTO_INCREMENT=1001;
 
 ALTER TABLE Entity_Details MODIFY COLUMN id INT AUTO_INCREMENT;
-ALTER TABLE Entity_Details AUTO_INCREMENT=0;
+ALTER TABLE Entity_Details AUTO_INCREMENT=1001;
 ALTER TABLE Entity_Details MODIFY Reference_Entity_ID INT NULL;
+----------------------------------------------------
+-- 26th Mar 2017
+Use tripleSDb;
+CREATE TABLE User
+	(id INT primary key, 
+		First_Name VARCHAR(100),
+        Last_Name VARCHAR(100),
+        Display_User_Name VARCHAR(100),
+        Created_Date DATE,
+        Password VARCHAR(20),
+        Email_ID VARCHAR(100),
+        Mobile_No VARCHAR(15)
+	);
+    
+CREATE TABLE Role
+	(id INT primary key, 
+		Name VARCHAR(200)
+	);    
+    
+CREATE TABLE User_Role
+	(User_ID INT, 
+		Role_ID INT,
+        PRIMARY KEY (User_ID,Role_ID),
+        FOREIGN KEY (User_ID) REFERENCES User(id),
+        FOREIGN KEY (Role_ID) REFERENCES Role(id)
+	);    
