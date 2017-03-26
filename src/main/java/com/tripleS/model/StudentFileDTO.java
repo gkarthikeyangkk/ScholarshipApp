@@ -1,4 +1,4 @@
-package com.tripleS.dto;
+/*package com.tripleS.model;
 
 import java.sql.Date;
 
@@ -83,3 +83,4 @@ public class StudentFileDTO {
 		this.interviewedDate = interviewedDate;
 	}
 }
+*/

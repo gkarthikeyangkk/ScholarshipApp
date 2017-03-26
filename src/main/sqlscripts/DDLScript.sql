@@ -148,8 +148,8 @@ CREATE TABLE Student_Application
 ----------------------------------------------------
 -- 16th Mar 2017    
 ALTER TABLE Student_File MODIFY COLUMN id INT AUTO_INCREMENT;
-ALTER TABLE Student_File AUTO_INCREMENT=1001;
+ALTER TABLE Student_File AUTO_INCREMENT=0;
 
 ALTER TABLE Entity_Details MODIFY COLUMN id INT AUTO_INCREMENT;
-ALTER TABLE Entity_Details AUTO_INCREMENT=1001;
+ALTER TABLE Entity_Details AUTO_INCREMENT=0;
 ALTER TABLE Entity_Details MODIFY Reference_Entity_ID INT NULL;

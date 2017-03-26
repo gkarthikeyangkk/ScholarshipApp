@@ -1,4 +1,4 @@
-package com.tripleS.dto;
+package com.tripleS.model;
 
 public class Greeting {
 

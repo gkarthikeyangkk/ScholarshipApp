@@ -1,11 +1,11 @@
-package com.tripleS.dao;
+/*package com.tripleS.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.tripleS.dto.StudentFileDTO;
+import com.tripleS.model.StudentFileDTO;
 
 @Component
 @Repository
@@ -35,3 +35,4 @@ public class StudentApplicationDAO {
 		
 	}
 }
+*/

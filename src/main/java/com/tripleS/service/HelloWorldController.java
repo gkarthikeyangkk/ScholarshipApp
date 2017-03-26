@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tripleS.dto.Greeting;
+import com.tripleS.model.Greeting;
 
 @Controller
 @RequestMapping("/hello-world")
