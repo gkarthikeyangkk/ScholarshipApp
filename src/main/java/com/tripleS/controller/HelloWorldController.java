@@ -1,4 +1,4 @@
-package com.tripleS.service;
+package com.tripleS.controller;
 
 import java.util.concurrent.atomic.AtomicLong;
 

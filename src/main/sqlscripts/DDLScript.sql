@@ -178,4 +178,14 @@ CREATE TABLE User_Role
         PRIMARY KEY (User_ID,Role_ID),
         FOREIGN KEY (User_ID) REFERENCES User(id),
         FOREIGN KEY (Role_ID) REFERENCES Role(id)
-	);    
+	);
+
+----------------------------------------------------
+-- 03rd May 2017    
+ALTER TABLE User MODIFY COLUMN id INT AUTO_INCREMENT;
+ALTER TABLE Role MODIFY COLUMN id INT AUTO_INCREMENT;
+
+----------------------------------------------------
+-- 04th May 2017
+use triplesdb;
+ALTER TABLE user MODIFY COLUMN Password VARCHAR(70);
