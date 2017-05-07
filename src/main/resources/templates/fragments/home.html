@@ -1,4 +1,5 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 		<title>Student Scholarship Application</title>
 		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
@@ -9,7 +10,7 @@
 	</head>
 	<body>
 		<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse" th:fragment="header">
-			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target=				"#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<a class="navbar-brand" href="#">Logo</a>
@@ -21,7 +22,7 @@
 						  New File
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="#" th:href="@{/studentApplication/newCase.html}">New Case</a>
+							<a class="dropdown-item" href="#" th:href="@{/studentApplication/basicDetails.html}">New Case</a>
 							<a class="dropdown-item" href="#">New Application</a>
 						</div>
 					</li>
@@ -38,7 +39,8 @@
 				<form class="form-inline my-2 my-lg-0">
 					<input class="form-control mr-sm-2" type="text" placeholder="Enter Case No">
 					<!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-					<a class="mr-sm-2" href="#" style="color:white"><span th:utext="${userName}"></span></a>
+					<!-- <a class="mr-sm-2" href="#" style="color:white"><span th:utext="${userName}"></span></a> -->
+					<a class="mr-sm-2" href="#" style="color:white"><span sec:authentication="name">currentUser</span></a>
 					<a class="mr-sm-2" th:href="@{/logout}" style="color:white" id="userLogout">
 						<i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>Logout
 					</a>

@@ -13,7 +13,7 @@ public class StudentFile {
 	private int id;
 	
 	@Column(name="File_No")
-    private String fileNo;
+    private int fileNo;
 	
 	@Column(name="File_Status")
     private String fileStatus;
@@ -40,10 +40,10 @@ public class StudentFile {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getFileNo() {
+	public int getFileNo() {
 		return fileNo;
 	}
-	public void setFileNo(String fileNo) {
+	public void setFileNo(int fileNo) {
 		this.fileNo = fileNo;
 	}
 	public String getFileStatus() {

@@ -189,3 +189,8 @@ ALTER TABLE Role MODIFY COLUMN id INT AUTO_INCREMENT;
 -- 04th May 2017
 use triplesdb;
 ALTER TABLE user MODIFY COLUMN Password VARCHAR(70);
+
+----------------------------------------------------
+-- 07th May 2017
+use triplesdb;
+ALTER TABLE Student_File MODIFY COLUMN File_No INT;
