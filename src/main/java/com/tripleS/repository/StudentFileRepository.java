@@ -9,4 +9,6 @@ public interface StudentFileRepository extends JpaRepository<StudentFile, Intege
 	
 	@Query("Select MAX(s.fileNo) from StudentFile s")
 	int getMaxFileNo();
+
+	StudentFile findByFileNo(int fileNo);
 }
