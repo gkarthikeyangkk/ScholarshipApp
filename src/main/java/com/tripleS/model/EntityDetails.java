@@ -6,6 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="Entity_Details")
@@ -22,6 +26,7 @@ public class EntityDetails {
     private String category;
 	
 	@Column(name="First_Name")
+	@NotEmpty(message = "*Please provide first name")
     private String firstName;
 	
 	@Column(name="Middle_Name")
@@ -37,9 +42,12 @@ public class EntityDetails {
     private String telephoneNo;
 	
 	@Column(name="Mobile_No")
+	@Pattern(regexp="(^$|[0-9]{10})", message = "*Mobile number must be exactly 10 digits")
+	@NotEmpty(message = "*Please provide your mobile number")
     private String mobileNo;
 	
 	@Column(name="Alternate_Contact_No")
+	@Pattern(regexp="(^$|[0-9]{10})", message = "*Alternate contact number must be exactly 10 digits")
     private String alternateContactNo;
 	
 	@Column(name="Salary_Per_Month")

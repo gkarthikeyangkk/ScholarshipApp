@@ -6,6 +6,7 @@
 		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-grid.min.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-reboot.min.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/font-awesome-4.7.0/css/font-awesome.css}" />
 	</head>
 	<body>
@@ -25,32 +26,52 @@
 					<div>
 						<h2>Student Basic Details</h2>
 						<form id="studentBasicForm" role="form" th:action="@{/studentApplication/basicDetails}"
-								th:object="${applicantFile}" method="post">
-							<div class="form-group row" id="firstRow">
+								th:object="${studentFile}" method="post">
+							<div class="form-group row" id="firstRowLabel">
 								<div class="col-sm-4">
 									<label th:if="${#fields.hasErrors('entityDetails.firstName')}" th:errors="*{entityDetails.firstName}"
-										class="validation-message"></label>
-									<input type="text" th:field="*{entityDetails.firstName}" placeholder="First Name"
-										class="form-control" /> 
+										class="validation-message align-bottom"></label>
 								</div>
 								<div class="col-sm-4">
 									<label th:if="${#fields.hasErrors('entityDetails.middleName')}" th:errors="*{entityDetails.middleName}"
 										class="validation-message"></label>
-									<input type="text" th:field="*{entityDetails.middleName}" placeholder="Middle Name"
-										class="form-control" /> 
 								</div>
 								<div class="col-sm-4">
 									<label th:if="${#fields.hasErrors('entityDetails.lastName')}" th:errors="*{entityDetails.lastName}"
 										class="validation-message"></label>
+								</div>
+							</div>
+							<div class="form-group row" id="firstRow">
+								<div class="col-sm-4">
+									<input type="text" th:field="*{entityDetails.firstName}" placeholder="First Name"
+										class="form-control" /> 
+								</div>
+								<div class="col-sm-4">
+									<input type="text" th:field="*{entityDetails.middleName}" placeholder="Middle Name"
+										class="form-control" /> 
+								</div>
+								<div class="col-sm-4">
 									<input type="text" th:field="*{entityDetails.lastName}" placeholder="Last Name"
 										class="form-control" /> 
 								</div>
 							</div>
 							
-							<div class="form-group row" id="secondRow">
+							<div class="form-group row" id="secondRowLabel">
 								<div class="col-sm-4">
 									<label th:if="${#fields.hasErrors('entityDetails.mobileNo')}" th:errors="*{entityDetails.mobileNo}"
 										class="validation-message"></label>
+								</div>
+								<div class="col-sm-4">
+									<label th:if="${#fields.hasErrors('entityDetails.alternateContactNo')}" th:errors="*{entityDetails.alternateContactNo}"
+										class="validation-message"></label>
+								</div>
+								<div class="col-sm-4">
+									<label th:if="${#fields.hasErrors('entityDetails.telephoneNo')}" th:errors="*{entityDetails.telephoneNo}"
+										class="validation-message"></label>
+								</div>
+							</div>
+							<div class="form-group row" id="secondRow">
+								<div class="col-sm-4">
 									<input th:field="*{entityDetails.mobileNo}" placeholder="Mobile Number"
 										class="form-control" type="tel" maxlength="10" />
 									<!-- <label for="studentMobileNo">Mobile Number</label>
@@ -58,16 +79,12 @@
 									<!--<input class="form-control" id="studentMobileNo" type="tel" placeholder="+91 (123)456-7890" pattern="[\+]\d{2}[\(]\d{3}[\)]\d{3}[\-]\d{4}">-->
 								</div>
 								<div class="col-sm-4">
-									<label th:if="${#fields.hasErrors('entityDetails.alternateContactNo')}" th:errors="*{entityDetails.alternateContactNo}"
-										class="validation-message"></label>
 									<input th:field="*{entityDetails.alternateContactNo}" placeholder="Alternate Contact Number"
 										class="form-control" type="tel" maxlength="10" />
 									<!-- <label for="studentAltContactNo">Alternate Contact Number</label>
 									<input class="form-control" id="studentAltContactNo" type="tel" maxlength="10"> -->
 								</div>
 								<div class="col-sm-4">
-									<label th:if="${#fields.hasErrors('entityDetails.telephoneNo')}" th:errors="*{entityDetails.telephoneNo}"
-										class="validation-message"></label>
 									<input type="text" th:field="*{entityDetails.telephoneNo}" placeholder="Residence Telephone Number"
 										class="form-control" />
 									<!-- <label for="studentResidenceTelephoneNo">Residence Telephone Number</label>
@@ -93,9 +110,14 @@
 					</div>
 				</div>
 			</div>
+			<ul id="messages" th:with="notifyMessages=${session[T(com.tripleS.service.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
+      			<li th:each="msg : ${notifyMessages}" th:text="${msg.text}" th:class="${#strings.toLowerCase(msg.type)}"> </li>
+      			<span th:if="${notifyMessages}" th:remove="all" th:text="${session.remove(T(com.tripleS.service.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+    		</ul>
 		</div>
 		<script src="../js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
   		<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
   		<script src="../js/bootstrap-4.0.0.min.js" th:src="@{/js/bootstrap-4.0.0.min.js}"></script>
+  		<script src="../js/main.js" th:src="@{/js/main.js}"></script>
 	</body>
 </html>

@@ -3,6 +3,9 @@ package com.tripleS.model;
 import java.sql.Date;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="Student_File")
@@ -16,9 +19,11 @@ public class StudentFile {
     private int fileNo;
 	
 	@Column(name="File_Status")
+	//@NotEmpty(message="*File status cannot be empty")
     private String fileStatus;
 	
 	@Column(name="Created_By")
+	//@NotEmpty(message="*Created By cannot be empty")
     private String createdBy;
 	
 	@Column(name="Interviewed_By")
@@ -32,6 +37,7 @@ public class StudentFile {
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Entity_ID")
+	@Valid
     private EntityDetails entityDetails;
     
 	public int getId() {

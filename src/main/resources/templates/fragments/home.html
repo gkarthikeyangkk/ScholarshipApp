@@ -6,6 +6,7 @@
 		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-grid.min.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-reboot.min.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/font-awesome-4.7.0/css/font-awesome.css}" />
 	</head>
 	<body>
@@ -47,8 +48,15 @@
 				</form>
 			</div>
 		</nav>
+		
+		<ul id="messages" th:with="notifyMessages=${session[T(com.tripleS.service.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
+      		<li th:each="msg : ${notifyMessages}" th:text="${msg.text}" th:class="${#strings.toLowerCase(msg.type)}"> </li>
+      		<span th:if="${notifyMessages}" th:remove="all" th:text="${session.remove(T(com.tripleS.service.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+    	</ul>
+    	
 		<script src="../js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
   		<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
   		<script src="../js/bootstrap-4.0.0.min.js" th:src="@{/js/bootstrap-4.0.0.min.js}"></script>
+  		<script src="../js/main.js" th:src="@{/js/main.js}"></script>
 	</body>
 </html>
