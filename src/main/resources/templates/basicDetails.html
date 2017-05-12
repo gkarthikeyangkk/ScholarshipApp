@@ -44,7 +44,14 @@
 							<div class="form-group row" id="firstRow">
 								<div class="col-sm-4">
 									<input type="text" th:field="*{entityDetails.firstName}" placeholder="First Name"
-										class="form-control" /> 
+										class="form-control" />
+									<input type="hidden" th:field="*{id}" />
+									<input type="hidden" th:field="*{fileNo}" />
+									<input type="hidden" th:field="*{fileStatus}" />
+									<input type="hidden" th:field="*{createdBy}" />
+									<input type="hidden" th:field="*{createdDate}" />
+									<input type="hidden" th:field="*{entityDetails.id}" />
+									<input type="hidden" th:field="*{entityDetails.type}" />
 								</div>
 								<div class="col-sm-4">
 									<input type="text" th:field="*{entityDetails.middleName}" placeholder="Middle Name"

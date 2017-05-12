@@ -1,6 +1,6 @@
 package com.tripleS.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -29,6 +29,7 @@ public class StudentFile {
 	@Column(name="Interviewed_By")
     private String interviewedBy;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="Created_Date")
     private Date createdDate;
 	
