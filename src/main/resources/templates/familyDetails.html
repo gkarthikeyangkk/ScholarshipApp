@@ -1,26 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-	<head>
-		<title>Student Scholarship Application</title>
-		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-grid.min.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-reboot.min.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
-		<link rel="stylesheet" type="text/css" th:href="@{/font-awesome-4.7.0/css/font-awesome.css}" />
-	</head>
+	<head th:replace="fragments/home :: htmlhead">	</head>
 	<body>
 		<div th:replace="fragments/home :: header">&nbsp;</div>
 		<div class="container-fluid text-center">    
 			<div class="row content">
-				<!-- <div th:replace="fragments/caseMenu :: caseMenu">&nbsp;</div> -->
-				<div class="col-sm-2 sidenav nav-fill" th:fragment="caseMenu">
-					<nav class="nav flex-column nav-pills nav-fill">
-						<a class="nav-link active" href="#" th:href="@{/studentApplication/basicDetails/} + ${studentFile.fileNo}">Basic Details</a>
-						<a class="nav-link" href="#" th:href="@{/studentApplication/familyDetails/} + ${studentFile.fileNo}">Family Details</a>
-						<a class="nav-link" href="#studentBankAccountDetailsTab">Bank Account Details</a>
-						<a class="nav-link disabled" href="#">Disabled</a>
-					</nav>
-				</div>
+				<div th:replace="fragments/caseMenu :: caseMenu">&nbsp;</div>
 				<div class="col-sm-10 text-left" id="studentFamilyDetailsTab"> 
 					<div>
 						<h2>Family Details</h2>
@@ -28,16 +13,8 @@
 					</div>
 				</div>
 			</div>
-			
-			<ul id="messages" th:with="notifyMessages=${session[T(com.tripleS.service.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
-      			<li th:each="msg : ${notifyMessages}" th:text="${msg.text}" th:class="${#strings.toLowerCase(msg.type)}"> </li>
-      			<span th:if="${notifyMessages}" th:remove="all" th:text="${session.remove(T(com.tripleS.service.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
-    		</ul>
-    		
+			<div th:replace="fragments/home :: notifyMessages">&nbsp;</div>
 		</div>
-		<script src="../js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
-  		<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-  		<script src="../js/bootstrap-4.0.0.min.js" th:src="@{/js/bootstrap-4.0.0.min.js}"></script>
-  		<script src="../js/main.js" th:src="@{/js/main.js}"></script>
+		<div th:replace="fragments/home :: javascriptFiles">&nbsp;</div>
 	</body>
 </html>

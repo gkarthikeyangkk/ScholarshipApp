@@ -194,3 +194,18 @@ ALTER TABLE user MODIFY COLUMN Password VARCHAR(70);
 -- 07th May 2017
 use triplesdb;
 ALTER TABLE Student_File MODIFY COLUMN File_No INT;
+
+----------------------------------------------------
+-- 13th May 2017
+use triplesdb;
+ALTER TABLE Entity_Details ADD COLUMN Email_ID VARCHAR(100);
+ALTER TABLE Entity_Address_Details CHANGE PinCode Pincode VARCHAR(10);
+ALTER TABLE Entity_Address_Details DROP FOREIGN KEY entity_address_details_ibfk_1;
+ALTER TABLE Entity_Address_Details DROP COLUMN Entity_ID;
+ALTER TABLE Entity_Details ADD COLUMN Address_ID INT;
+ALTER TABLE Entity_Details 
+	ADD FOREIGN KEY entity_address_details_fk (Address_ID)
+	REFERENCES Entity_Address_Details (id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+ALTER TABLE Entity_Address_Details MODIFY COLUMN id INT AUTO_INCREMENT;

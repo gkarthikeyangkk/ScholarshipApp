@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-	<head>
+	<head th:fragment="htmlhead">
 		<title>Student Scholarship Application</title>
 		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-grid.min.css}" />
@@ -48,15 +48,17 @@
 				</form>
 			</div>
 		</nav>
-		
-		<ul id="messages" th:with="notifyMessages=${session[T(com.tripleS.service.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
-      		<li th:each="msg : ${notifyMessages}" th:text="${msg.text}" th:class="${#strings.toLowerCase(msg.type)}"> </li>
-      		<span th:if="${notifyMessages}" th:remove="all" th:text="${session.remove(T(com.tripleS.service.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
-    	</ul>
-    	
-		<script src="../js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
-  		<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-  		<script src="../js/bootstrap-4.0.0.min.js" th:src="@{/js/bootstrap-4.0.0.min.js}"></script>
-  		<script src="../js/main.js" th:src="@{/js/main.js}"></script>
+		<div th:fragment="notifyMessages">
+			<ul id="messages" th:with="notifyMessages=${session[T(com.tripleS.service.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
+	      		<li th:each="msg : ${notifyMessages}" th:text="${msg.text}" th:class="${#strings.toLowerCase(msg.type)}"> </li>
+	      		<span th:if="${notifyMessages}" th:remove="all" th:text="${session.remove(T(com.tripleS.service.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+	    	</ul>
+	    </div>
+    	<div th:fragment="javascriptFiles">
+			<script src="../js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+	  		<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+	  		<script src="../js/bootstrap-4.0.0.min.js" th:src="@{/js/bootstrap-4.0.0.min.js}"></script>
+	  		<script src="../js/main.js" th:src="@{/js/main.js}"></script>
+	  	</div>
 	</body>
 </html>

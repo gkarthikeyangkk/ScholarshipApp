@@ -6,8 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -41,9 +43,14 @@ public class EntityDetails {
 	@Column(name="Telephone_No")
     private String telephoneNo;
 	
+	@Column(name="Email_ID")
+	@Email(message = "*Please provide a valid Email Address")
+	@NotEmpty(message = "*Please provide an email address")
+	private String emailID;
+	
 	@Column(name="Mobile_No")
 	@Pattern(regexp="(^$|[0-9]{10})", message = "*Mobile number must be exactly 10 digits")
-	@NotEmpty(message = "*Please provide your mobile number")
+	@NotEmpty(message = "*Please provide mobile number")
     private String mobileNo;
 	
 	@Column(name="Alternate_Contact_No")
@@ -68,6 +75,11 @@ public class EntityDetails {
 	
 	@OneToOne(mappedBy = "entityDetails")
 	private StudentFile studentFile;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Address_ID")
+	@Valid
+    private EntityAddressDetails entityAddressDetails;
 	
 	public StudentFile getStudentFile() {
 		return studentFile;
@@ -141,6 +153,12 @@ public class EntityDetails {
 	public void setTelephoneNo(String telephoneNo) {
 		this.telephoneNo = telephoneNo;
 	}
+	public String getEmailID() {
+		return emailID;
+	}
+	public void setEmailID(String emailID) {
+		this.emailID = emailID;
+	}
 	public String getMobileNo() {
 		return mobileNo;
 	}
@@ -176,6 +194,12 @@ public class EntityDetails {
 	}
 	public void setHelpAmount(BigDecimal helpAmount) {
 		this.helpAmount = helpAmount;
+	}
+	public EntityAddressDetails getEntityAddressDetails() {
+		return entityAddressDetails;
+	}
+	public void setEntityAddressDetails(EntityAddressDetails entityAddressDetails) {
+		this.entityAddressDetails = entityAddressDetails;
 	}
 	
 }

@@ -1,8 +1,6 @@
 package com.tripleS.controller;
 
-import java.beans.PropertyEditorSupport;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.validation.Valid;
@@ -10,8 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.tripleS.model.StudentFile;
-import com.tripleS.repository.StudentFileRepository;
 import com.tripleS.service.NotificationService;
+import com.tripleS.service.StudentFileService;
 
 @Controller
 @RequestMapping("/studentApplication")
@@ -34,7 +30,7 @@ public class StudentApplicationService {
 			.getLogger(StudentApplicationService.class);
 	
 	@Autowired
-    StudentFileRepository studentFileRepository;
+	private StudentFileService studentFileService;
 	
 	@Autowired
     private NotificationService notifyService;
@@ -59,7 +55,7 @@ public class StudentApplicationService {
 		ModelAndView modelAndView = new ModelAndView();
 		if(fileNo > 0) {
 			logger.info("Path Variable... File No is " + fileNo);
-			StudentFile studentFile = studentFileRepository.findByFileNo(fileNo);
+			StudentFile studentFile = studentFileService.findByFileNo(fileNo);
 			if(studentFile != null) {
 				logger.info("Applicant Name: " + studentFile.getEntityDetails().getFirstName());
 				modelAndView.addObject("studentFile", studentFile);
@@ -109,24 +105,15 @@ public class StudentApplicationService {
 			logger.info("Found no validation errors");
 	    	if(studentFile.getId() > 0) {
 	    		logger.info("Existing File ID: " + studentFile.getId());
-	    		studentFile = studentFileRepository.save(studentFile);
+	    		studentFile = studentFileService.update(studentFile);
 	    		logger.info("File ID After Update: " + studentFile.getId());
 	    		logger.info(studentFile.getEntityDetails().getFirstName() + "'s basic details updated successfully");
-		        notifyService.addInfoMessage(studentFile.getEntityDetails().getFirstName() + "'s basic details updated successfully");
+		        notifyService.addInfoMessage(studentFile.getEntityDetails().getFirstName() + "'s basic details updated successfully!!");
 	    	} else {
-		    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		    	
-		        studentFile.setFileNo(studentFileRepository.getMaxFileNo() + 1);
-		        studentFile.setFileStatus("New");
-		        studentFile.setCreatedBy(auth.getName());
-		        studentFile.setCreatedDate(new Date());
-		        //studentFile.setCreatedDate(new Date(new java.util.Date().getTime()));
-		        studentFile.getEntityDetails().setType("Applicant");
-	        
-		        studentFile = studentFileRepository.save(studentFile);
+		        studentFile = studentFileService.save(studentFile);
 		        logger.info("New File No: " + studentFile.getFileNo());
 		        logger.info(studentFile.getEntityDetails().getFirstName() + "'s basic details saved successfully");
-		        notifyService.addInfoMessage(studentFile.getEntityDetails().getFirstName() + "'s basic details saved successfully");
+		        notifyService.addInfoMessage(studentFile.getEntityDetails().getFirstName() + "'s basic details saved successfully!!");
 	    	}
 	        //modelAndView.addObject("studentFile", studentFile);
 	        redirectAttributes.addFlashAttribute("studentFile", studentFile);

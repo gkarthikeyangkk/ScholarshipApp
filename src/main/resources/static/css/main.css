@@ -56,3 +56,8 @@ ul#messages li.error {
 	background: #d00;
 	color: white;
 }
+
+.required-field::before { 
+    content: "*";
+    color: red;
+}
