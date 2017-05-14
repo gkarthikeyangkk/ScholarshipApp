@@ -81,6 +81,17 @@ public class EntityDetails {
 	@Valid
     private EntityAddressDetails entityAddressDetails;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Student_ID")
+	@Valid
+    private StudentDetails studentDetails;
+	
+	public StudentDetails getStudentDetails() {
+		return studentDetails;
+	}
+	public void setStudentDetails(StudentDetails studentDetails) {
+		this.studentDetails = studentDetails;
+	}
 	public StudentFile getStudentFile() {
 		return studentFile;
 	}

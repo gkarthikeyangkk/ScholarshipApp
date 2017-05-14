@@ -24,7 +24,7 @@ ALTER TABLE Entity_Details
 	ADD FOREIGN KEY ref_entity_id_fk (Reference_Entity_ID) 
 	REFERENCES Entity_Details (id);
         
-CREATE TABLE Student_Entity_Details 
+CREATE TABLE Student_Entity_Details
 	(id INT primary key, 
 		Entity_ID INT,
         Mother_Tongue VARCHAR(100), 
@@ -209,3 +209,23 @@ ALTER TABLE Entity_Details
     ON DELETE CASCADE
     ON UPDATE CASCADE;
 ALTER TABLE Entity_Address_Details MODIFY COLUMN id INT AUTO_INCREMENT;
+
+----------------------------------------------------
+-- 14th May 2017
+ALTER TABLE Student_Entity_Details DROP FOREIGN KEY student_entity_details_ibfk_1;
+ALTER TABLE Student_Entity_Details DROP COLUMN Entity_ID;
+ALTER TABLE Entity_Details ADD COLUMN Student_ID INT;
+ALTER TABLE Entity_Details
+	ADD FOREIGN KEY student_entity_details_fk (Student_ID)
+	REFERENCES Student_Entity_Details (id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE;
+ALTER TABLE Student_Entity_Details MODIFY COLUMN id INT AUTO_INCREMENT;
+ALTER TABLE Student_Entity_Details MODIFY COLUMN Date_Of_Birth DATE;
+ALTER TABLE Student_Entity_Details DROP COLUMN Have_Won_Prize;
+ALTER TABLE Student_Entity_Details DROP COLUMN Have_Job_Or_Business;
+ALTER TABLE Student_Entity_Details DROP COLUMN Have_Other_Problem_In_Family;
+ALTER TABLE Student_Entity_Details DROP COLUMN Have_Other_Family_Members_Got_Help;
+ALTER TABLE Student_Entity_Details MODIFY COLUMN Got_Help_From_Other_Sources BIT(1);
+ALTER TABLE Student_Entity_Details MODIFY COLUMN Have_Education_Loan BIT(1);
+ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_If_Other_Family_Members_Got_Help VARCHAR(1000);

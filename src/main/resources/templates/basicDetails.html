@@ -41,6 +41,7 @@
 										<input type="hidden" th:field="*{entityDetails.id}" />
 										<input type="hidden" th:field="*{entityDetails.type}" />
 										<input type="hidden" th:field="*{entityDetails.entityAddressDetails.id}" />
+										<input type="hidden" th:field="*{entityDetails.studentDetails.id}" />
 									</div>
 								</div>
 								<div class="col-sm-4">
@@ -205,6 +206,67 @@
 										<div class="col-sm-11">
 											<input type="text" th:field="*{entityDetails.entityAddressDetails.pincode}"
 												placeholder="Pincode" class="form-control" maxlength="6" />										
+										</div>
+										<label class="required-field"></label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row" id="sixthRowLabel">
+								<div class="col-sm-3">
+									<label th:if="${#fields.hasErrors('entityDetails.studentDetails.dateOfBirth')}"
+										th:errors="*{entityDetails.studentDetails.dateOfBirth}"
+										class="validation-message"></label>
+								</div>
+								<div class="col-sm-3">
+									<label th:if="${#fields.hasErrors('entityDetails.studentDetails.placeOfBirth')}"
+										th:errors="*{entityDetails.studentDetails.placeOfBirth}"
+										class="validation-message"></label>
+								</div>
+								<div class="col-sm-3">
+									<label th:if="${#fields.hasErrors('entityDetails.studentDetails.religion')}"
+										th:errors="*{entityDetails.studentDetails.religion}"
+										class="validation-message"></label>
+								</div>
+								<div class="col-sm-3">
+									<label th:if="${#fields.hasErrors('entityDetails.studentDetails.motherTongue')}"
+										th:errors="*{entityDetails.studentDetails.motherTongue}"
+										class="validation-message"></label>
+								</div>
+							</div>
+							<div class="form-group row" id="sixthRow">
+								<div class="col-sm-3">
+									<div class="row">
+										<div class="col-sm-11">
+											<input th:field="*{entityDetails.studentDetails.dateOfBirth}" 
+												placeholder="Date of Birth" class="form-control dobMask" type="text" />
+												<!-- placeholder="Date of Birth" class="form-control" onfocus="(this.type='date')" onfocusout="(this.type='text')"/> -->
+										</div>
+										<label class="required-field"></label>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="row">
+										<div class="col-sm-11">
+											<input type="text" th:field="*{entityDetails.studentDetails.placeOfBirth}"
+												placeholder="Place of Birth" class="form-control" maxlength="100" />										
+										</div>
+										<label class="required-field"></label>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="row">
+										<div class="col-sm-11">
+											<input type="text" th:field="*{entityDetails.studentDetails.religion}"
+												placeholder="Religion" class="form-control" maxlength="50" />										
+										</div>
+										<label class="required-field"></label>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="row">
+										<div class="col-sm-11">
+											<input type="text" th:field="*{entityDetails.studentDetails.motherTongue}"
+												placeholder="Mother Tongue" class="form-control" maxlength="100" />										
 										</div>
 										<label class="required-field"></label>
 									</div>

@@ -33,6 +33,7 @@ public class StudentFile {
 	@Column(name="Created_Date")
     private Date createdDate;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="Interviewed_Date")
     private Date interviewedDate;
 	
