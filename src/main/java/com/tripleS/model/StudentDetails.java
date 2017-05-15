@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="Student_Entity_Details")
@@ -55,7 +56,8 @@ public class StudentDetails {
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name="Date_Of_Birth")
-	@NotNull(message = "*Please provide date of birth")
+	//@DateTimeFormat(pattern = "dd/MM/yyyy")
+	//@NotNull(message = "*Please provide date of birth")
     private Date dateOfBirth;
 	
 	@Column(name="Place_Of_Birth")

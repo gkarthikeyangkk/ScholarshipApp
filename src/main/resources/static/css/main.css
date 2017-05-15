@@ -61,3 +61,11 @@ ul#messages li.error {
     content: "*";
     color: red;
 }
+
+.messageError {
+	color: red;
+}
+
+.messageSuccess {
+	color: green;
+}

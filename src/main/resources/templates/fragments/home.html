@@ -54,6 +54,24 @@
 	      		<span th:if="${notifyMessages}" th:remove="all" th:text="${session.remove(T(com.tripleS.service.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
 	    	</ul>
 	    </div>
+	    <div class="modal fade" id="messageModal" role="dialog" th:fragment="modalFragment">
+		    <div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<!-- <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Modal Header</h4>
+					</div> -->
+					<div class="modal-body">
+						<p id="messageSuccess" class="messageSuccess"></p>
+						<p id="messageError" class="messageError"></p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+		    </div>
+		</div>
     	<div th:fragment="javascriptFiles">
 			<script src="../js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
 	  		<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
