@@ -229,3 +229,10 @@ ALTER TABLE Student_Entity_Details DROP COLUMN Have_Other_Family_Members_Got_Hel
 ALTER TABLE Student_Entity_Details MODIFY COLUMN Got_Help_From_Other_Sources BIT(1);
 ALTER TABLE Student_Entity_Details MODIFY COLUMN Have_Education_Loan BIT(1);
 ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_If_Other_Family_Members_Got_Help VARCHAR(1000);
+
+----------------------------------------------------
+-- 16th May 2017
+ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_Prize_Details VARCHAR(1000);
+ALTER TABLE Student_Entity_Details MODIFY COLUMN Aim_In_Life VARCHAR(1000);
+ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_Job_Business_Details VARCHAR(1000);
+ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_Other_Problems_In_Family VARCHAR(1000);

@@ -24,6 +24,11 @@ $(function() {
 	});
 });
 
+function countChar(obj, trackCharactersObjID) {
+    var len = obj.value.length;
+    $(trackCharactersObjID).text((obj.maxLength - len) + " characters remaining");
+}
+
 function displayModal(message) {
 	$("#messageModal").find("#messageError").text(message);
 	$("#messageModal").modal('show');

@@ -272,7 +272,48 @@
 									</div>
 								</div>
 							</div>
+							<div class="form-group row" id="seventhRow">
+								<div class="col-sm-6">
+									<textarea th:field="*{entityDetails.studentDetails.aimInLife}" 
+										placeholder="Aim in Life" class="form-control" maxlength="1000" rows="5" 
+										onkeyup="countChar(this,charNumAimInLife)">
+									</textarea>
+									<div id="charNumAimInLife" class="charNum"></div>
+								</div>
+								<div class="col-sm-6">
+									<textarea th:field="*{entityDetails.studentDetails.describePrizeDetails}" 
+										placeholder="If you have won any prize, please describe" class="form-control" 
+										maxlength="1000" rows="5" onkeyup="countChar(this,charNumDescribePrizeDetails)">
+									</textarea>
+									<div id="charNumDescribePrizeDetails" class="charNum"></div>
+								</div>
+							</div>
 							<div class="form-group row" id="eighthRow">
+								<div class="col-sm-6">
+									<textarea th:field="*{entityDetails.studentDetails.describeIfOtherFamilyMembersGotHelp}" 
+										placeholder="If other family members have got help, please describe" class="form-control"
+										maxlength="1000" rows="5" onkeyup="countChar(this,charNumDescribeIfOtherFamilyMembersGotHelp)">
+									</textarea>
+									<div id="charNumDescribeIfOtherFamilyMembersGotHelp" class="charNum"></div>
+								</div>
+								<div class="col-sm-6">
+									<textarea th:field="*{entityDetails.studentDetails.describeOtherProblemsInFamily}" 
+										placeholder="If you have other problems in family, please describe" class="form-control" 
+										maxlength="1000" rows="5" onkeyup="countChar(this,charNumDescribeOtherProblemsInFamily)">
+									</textarea>
+									<div id="charNumDescribeOtherProblemsInFamily" class="charNum"></div>
+								</div>
+							</div>
+							<div class="form-group row" id="ninthRow">
+								<div class="col-sm-12">
+									<textarea th:field="*{entityDetails.studentDetails.describeJobBusinessDetails}" 
+										placeholder="If you have job or doing business, please describe" class="form-control"
+										maxlength="1000" rows="3" onkeyup="countChar(this,charNumDescribeJobBusinessDetails)">
+									</textarea>
+									<div id="charNumDescribeJobBusinessDetails" class="charNum"></div>
+								</div>
+							</div>
+							<div class="form-group row" id="tenthRow">
 								<div class="col-sm-6">
 
 								</div>

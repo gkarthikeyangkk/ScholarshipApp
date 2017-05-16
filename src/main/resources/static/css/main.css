@@ -69,3 +69,7 @@ ul#messages li.error {
 .messageSuccess {
 	color: green;
 }
+
+.charNum {
+	color: red;
+}

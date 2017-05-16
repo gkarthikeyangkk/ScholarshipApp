@@ -36,7 +36,6 @@ public class StudentDetails {
     private String describePrizeDetails;
 	
 	@Column(name="Aim_In_Life")
-	//@NotEmpty(message = "*Please provide aim in life")
     private String aimInLife;
 	
 	@Column(name="Describe_Job_Business_Details")
