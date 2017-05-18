@@ -2,7 +2,9 @@ package com.tripleS.model;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -98,8 +100,8 @@ public class EntityDetails {
 	public void setStudentFile(StudentFile studentFile) {
 		this.studentFile = studentFile;
 	}
-	@OneToMany(mappedBy="applicant")
-    private Set<EntityDetails> relatives = new HashSet<EntityDetails>();
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="applicant")
+    private List<EntityDetails> relatives = new ArrayList<EntityDetails>();
     
     public EntityDetails getApplicant() {
 		return applicant;
@@ -108,10 +110,10 @@ public class EntityDetails {
 		this.applicant = applicant;
 	}
 	
-	public Set<EntityDetails> getRelatives() {
+	public List<EntityDetails> getRelatives() {
 		return relatives;
 	}
-	public void setRelatives(Set<EntityDetails> relatives) {
+	public void setRelatives(List<EntityDetails> relatives) {
 		this.relatives = relatives;
 	}
 	
