@@ -42,6 +42,9 @@ public class EntityDetails {
 	@Column(name="Full_Name")
     private String fullName;
 	
+	@Column(name="Age")
+	private Integer age;
+	
 	@Column(name="Telephone_No")
     private String telephoneNo;
 	
@@ -58,6 +61,9 @@ public class EntityDetails {
 	@Column(name="Alternate_Contact_No")
 	@Pattern(regexp="(^$|[0-9]{10})", message = "*Alternate contact number must be exactly 10 digits")
     private String alternateContactNo;
+	
+	@Column(name="Qualification")
+	private String qualification;
 	
 	@Column(name="Salary_Per_Month")
     private BigDecimal salaryPerMonth;
@@ -88,6 +94,9 @@ public class EntityDetails {
 	@Valid
     private StudentDetails studentDetails;
 	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="applicant")
+    private List<EntityDetails> relatives = new ArrayList<EntityDetails>();
+	
 	public StudentDetails getStudentDetails() {
 		return studentDetails;
 	}
@@ -100,8 +109,6 @@ public class EntityDetails {
 	public void setStudentFile(StudentFile studentFile) {
 		this.studentFile = studentFile;
 	}
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="applicant")
-    private List<EntityDetails> relatives = new ArrayList<EntityDetails>();
     
     public EntityDetails getApplicant() {
 		return applicant;
@@ -160,6 +167,12 @@ public class EntityDetails {
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
 	public String getTelephoneNo() {
 		return telephoneNo;
 	}
@@ -183,6 +196,12 @@ public class EntityDetails {
 	}
 	public void setAlternateContactNo(String alternateContactNo) {
 		this.alternateContactNo = alternateContactNo;
+	}
+	public String getQualification() {
+		return qualification;
+	}
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
 	}
 	public BigDecimal getSalaryPerMonth() {
 		return salaryPerMonth;

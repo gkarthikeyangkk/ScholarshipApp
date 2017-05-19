@@ -232,7 +232,15 @@ ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_If_Other_Family_Member
 
 ----------------------------------------------------
 -- 16th May 2017
+USE triplesdb;
 ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_Prize_Details VARCHAR(1000);
 ALTER TABLE Student_Entity_Details MODIFY COLUMN Aim_In_Life VARCHAR(1000);
 ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_Job_Business_Details VARCHAR(1000);
 ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_Other_Problems_In_Family VARCHAR(1000);
+
+----------------------------------------------------
+-- 19th May 2017
+USE triplesdb;
+ALTER TABLE Entity_Details ADD COLUMN Age TINYINT UNSIGNED;
+ALTER TABLE Entity_Details MODIFY COLUMN Age INT UNSIGNED;
+ALTER TABLE Entity_Details ADD COLUMN Qualification VARCHAR(100);

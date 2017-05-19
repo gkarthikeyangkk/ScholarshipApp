@@ -94,6 +94,15 @@ public class StudentApplicationService {
 	    return "familyDetails";
 	}
 
+	@RequestMapping(value="/relativeDetails", params={"addSchoolEmployerDetails"})
+	public String addSchoolEmployer(
+	        final StudentFile studentFile, final BindingResult bindingResult, 
+	        final HttpServletRequest req) {
+	    final Integer rowId = Integer.valueOf(req.getParameter("addSchoolEmployerDetails"));
+	    studentFile.getEntityDetails().getRelatives().get(rowId.intValue()).getRelatives().add(new EntityDetails());
+	    return "familyDetails";
+	}
+	
 	@RequestMapping(value="/relativeDetails", params={"removeEntityDetails"})
 	public String removeRow(
 	        final StudentFile studentFile, final BindingResult bindingResult, 
