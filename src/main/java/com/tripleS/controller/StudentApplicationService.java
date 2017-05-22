@@ -79,22 +79,50 @@ public class StudentApplicationService {
 		}
 	}
 	
+	@RequestMapping(value="/familyDetails/{fileNo}", method = RequestMethod.GET)
+	public ModelAndView familyDetails(@PathVariable("fileNo") int fileNo){
+		ModelAndView modelAndView = new ModelAndView();
+		if(fileNo > 0) {
+			logger.info("Path Variable... File No is " + fileNo);
+			StudentFile studentFile = studentFileService.findByFileNo(fileNo);
+			if(studentFile != null) {
+				logger.info("Applicant Name: " + studentFile.getEntityDetails().getFirstName());
+				modelAndView.addObject("studentFile", studentFile);
+				modelAndView.setViewName("familyDetails");
+				return modelAndView;
+			} else {
+				logger.error("Invalid case number: " + fileNo);
+				notifyService.addErrorMessage("Invalid case number: " + fileNo);
+				modelAndView.setViewName("fragments/home");
+				return modelAndView;
+			}
+		} else {
+			logger.error("Invalid case number: " + fileNo);
+			notifyService.addErrorMessage("Invalid case number: " + fileNo);
+			modelAndView.setViewName("fragments/home");
+			return modelAndView;
+		}
+	}
+	
 	@RequestMapping(value="/familyDetails", method = RequestMethod.GET)
 	public String familyDetails(Model model){
 		logger.info("In the family details Get Request...File No is " + ((StudentFile) model.asMap().get("studentFile")).getFileNo());
-		//ModelAndView modelAndView = new ModelAndView();
-		//modelAndView.addObject("familyMembers", new ArrayList<EntityDetails>());
-		//modelAndView.setViewName("familyDetails");
 		return "familyDetails";
 	}
 	
-	@RequestMapping(value="/relativeDetails", params={"addEntityDetails"})
+	@RequestMapping(value="/bankAccountDetails", method = RequestMethod.GET)
+	public String bankAccountDetails(Model model){
+		logger.info("In the family details Get Request...File No is " + ((StudentFile) model.asMap().get("studentFile")).getFileNo());
+		return "bankAccountDetails";
+	}
+	
+	@RequestMapping(value="/familyDetails", params={"addEntityDetails"})
 	public String addRow(final StudentFile studentFile, final BindingResult bindingResult) {
 	    studentFile.getEntityDetails().getRelatives().add(new EntityDetails());
 	    return "familyDetails";
 	}
 
-	@RequestMapping(value="/relativeDetails", params={"addSchoolEmployerDetails"})
+	@RequestMapping(value="/familyDetails", params={"addSchoolEmployerDetails"})
 	public String addSchoolEmployer(
 	        final StudentFile studentFile, final BindingResult bindingResult, 
 	        final HttpServletRequest req) {
@@ -103,7 +131,7 @@ public class StudentApplicationService {
 	    return "familyDetails";
 	}
 	
-	@RequestMapping(value="/relativeDetails", params={"removeEntityDetails"})
+	@RequestMapping(value="/familyDetails", params={"removeEntityDetails"})
 	public String removeRow(
 	        final StudentFile studentFile, final BindingResult bindingResult, 
 	        final HttpServletRequest req) {
@@ -115,9 +143,6 @@ public class StudentApplicationService {
 	@RequestMapping(value="/fragments/home", method = RequestMethod.GET)
 	public ModelAndView home(){
 		ModelAndView modelAndView = new ModelAndView();
-		/*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByEmailID(auth.getName());
-		modelAndView.addObject("userName", user.getFirstName());*/
 		modelAndView.setViewName("fragments/home");
 		return modelAndView;
 	}
@@ -174,6 +199,64 @@ public class StudentApplicationService {
 	        //modelAndView.addObject("studentFile", studentFile);
 	    	modelAndView.setViewName("basicDetails");
 		}
+        return modelAndView;
+    }
+    
+    @RequestMapping(value = "/familyDetails", method=RequestMethod.POST, params={"saveContinueFamilyDetails"})
+    public ModelAndView saveContinueFamilyDetails(@Valid StudentFile studentFile, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    	ModelAndView modelAndView = new ModelAndView();
+    	if (bindingResult.hasErrors()) {
+        	logger.error("Found validation errors");
+        	modelAndView.addObject("studentFile", studentFile);
+			modelAndView.setViewName("basicDetails");
+		} else {
+			logger.info("Found no validation errors");
+	    	if(studentFile.getId() > 0) {
+	    		logger.info("Existing File ID: " + studentFile.getId());
+	    		studentFile = studentFileService.update(studentFile);
+	    		logger.info("File ID After Update: " + studentFile.getId());
+	    		logger.info(studentFile.getEntityDetails().getFirstName() + "'s family details updated successfully");
+		        notifyService.addInfoMessage(studentFile.getEntityDetails().getFirstName() + "'s basic details updated successfully!!");
+	    	} else {
+		        studentFile = studentFileService.save(studentFile);
+		        logger.info("New File No: " + studentFile.getFileNo());
+		        logger.info(studentFile.getEntityDetails().getFirstName() + "'s family details saved successfully");
+		        notifyService.addInfoMessage(studentFile.getEntityDetails().getFirstName() + "'s family details saved successfully!!");
+	    	}
+	        //modelAndView.addObject("studentFile", studentFile);
+	        redirectAttributes.addFlashAttribute("studentFile", studentFile);
+	        modelAndView.setViewName("redirect:/studentApplication/bankAccountDetails");
+		}
+        return modelAndView;
+    }
+    
+    @RequestMapping(value = "/familyDetails", method=RequestMethod.POST, params={"saveFamilyDetails"})
+    public ModelAndView saveFamilyDetails(@Valid StudentFile studentFile, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    	ModelAndView modelAndView = new ModelAndView();
+    	if (bindingResult.hasErrors()) {
+        	logger.error("Found validation errors");
+        	modelAndView.addObject("studentFile", studentFile);
+		} else {
+			logger.info("Found no validation errors");
+	    	if(studentFile.getId() > 0) {
+	    		logger.info("Existing File ID: " + studentFile.getId());
+	    		
+	    		for (int i = 0; i < studentFile.getEntityDetails().getRelatives().size(); i++) {
+	    			studentFile.getEntityDetails().getRelatives().get(i).setApplicant(studentFile.getEntityDetails());
+	    		}
+	    		
+	    		studentFile = studentFileService.update(studentFile);
+	    		logger.info("File ID After Update: " + studentFile.getId());
+	    		logger.info(studentFile.getEntityDetails().getFirstName() + "'s family details updated successfully");
+		        notifyService.addInfoMessage(studentFile.getEntityDetails().getFirstName() + "'s family details updated successfully!!");
+	    	} else {
+		        studentFile = studentFileService.save(studentFile);
+		        logger.info("New File No: " + studentFile.getFileNo());
+		        logger.info(studentFile.getEntityDetails().getFirstName() + "'s family details saved successfully");
+		        notifyService.addInfoMessage(studentFile.getEntityDetails().getFirstName() + "'s family details saved successfully!!");
+	    	}
+		}
+    	modelAndView.setViewName("familyDetails");
         return modelAndView;
     }
 }
