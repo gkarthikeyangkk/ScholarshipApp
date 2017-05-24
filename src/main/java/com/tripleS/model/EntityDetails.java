@@ -95,7 +95,8 @@ public class EntityDetails {
     private StudentDetails studentDetails;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="applicant")
-    private List<EntityDetails> relatives = new ArrayList<EntityDetails>();
+	private List<EntityDetails> relatives;
+    //private List<EntityDetails> relatives = new ArrayList<EntityDetails>();
 	
 	public StudentDetails getStudentDetails() {
 		return studentDetails;
