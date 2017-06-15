@@ -2,7 +2,9 @@ package com.tripleS.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tripleS.model.EntityDetails;
 import com.tripleS.model.StudentFile;
+import com.tripleS.service.EntityDetailsService;
 import com.tripleS.service.NotificationService;
 import com.tripleS.service.StudentFileService;
 
@@ -35,6 +38,9 @@ public class StudentApplicationService {
 	
 	@Autowired
 	private StudentFileService studentFileService;
+	
+	@Autowired
+	private EntityDetailsService entityDetailsService;
 	
 	@Autowired
     private NotificationService notifyService;
@@ -106,7 +112,38 @@ public class StudentApplicationService {
 	
 	@RequestMapping(value="/familyDetails", method = RequestMethod.GET)
 	public String familyDetails(Model model){
-		logger.info("In the family details Get Request...File No is " + ((StudentFile) model.asMap().get("studentFile")).getFileNo());
+		//logger.info("In the family details Get Request...File No is " + ((StudentFile) model.asMap().get("studentFile")).getFileNo());
+		
+		logger.info("In the family details Get Request...File No is " + model.asMap().get("fileNo"));
+		int fileNo = (int) model.asMap().get("fileNo");
+		List<EntityDetails> relatives = entityDetailsService.findRelativesByFileNo(fileNo);
+		/* if(model.asMap().get("relatives") == null) {
+			relatives = entityDetailsService.findRelativesByFileNo(fileNo);
+		} else {
+			relatives = (List<EntityDetails>) model.asMap().get("relatives");
+		}
+		
+		if(model.asMap().get("entityDetails") != null) {
+			EntityDetails entityDetails = (EntityDetails) model.asMap().get("entityDetails");
+			if(relatives == null) {
+				relatives = new ArrayList<EntityDetails>();
+			} else {
+				EntityDetails applicant;
+				if(relatives.size() == 0) {
+					applicant = entityDetailsService.findApplicant(fileNo);
+				} else {
+					applicant = relatives.get(0).getApplicant();
+				}
+				entityDetails.setApplicant(applicant);
+			}
+			relatives.add(entityDetails);
+		}*/
+		model.asMap().put("relatives", relatives);
+		if(model.asMap().get("entityDetails") == null) {
+			model.asMap().put("entityDetails", new EntityDetails());
+		} else {
+			model.asMap().put("entityDetails", model.asMap().get("entityDetails"));
+		}
 		return "familyDetails";
 	}
 	
@@ -117,9 +154,28 @@ public class StudentApplicationService {
 	}
 	
 	@RequestMapping(value="/familyDetails", params={"addEntityDetails"})
-	public String addRow(final StudentFile studentFile, final BindingResult bindingResult) {
-	    studentFile.getEntityDetails().getRelatives().add(new EntityDetails());
-	    return "familyDetails";
+	public String addRelativeRow(final int fileNo, EntityDetails entityDetails, RedirectAttributes redirectAttributes) {
+		logger.info("File No is " + fileNo);
+		
+		entityDetails.setApplicant(entityDetailsService.findApplicant(fileNo));
+		entityDetails.setEmailID("temp@xyz.com");
+		entityDetails.setMobileNo("9321609101");
+		List<EntityDetails> relatives = entityDetails.getRelatives();
+		entityDetails = entityDetailsService.save(entityDetails);
+		
+		if(relatives != null) {
+			if(relatives.size() > 0){
+				EntityDetails relative = relatives.get(0);
+				relative.setApplicant(entityDetails);
+				relative.setEmailID("temp@xyz.com");
+				relative.setMobileNo("9321609101");
+				entityDetailsService.save(relative);
+			}
+		}
+		
+		redirectAttributes.addFlashAttribute("fileNo",fileNo);
+		//redirectAttributes.addFlashAttribute("entityDetails", entityDetails);
+	    return "redirect:/studentApplication/familyDetails";
 	}
 
 	@RequestMapping(value="/familyDetails", params={"addSchoolEmployerDetails"})
@@ -131,13 +187,26 @@ public class StudentApplicationService {
 	    return "familyDetails";
 	}
 	
+	@RequestMapping(value="/familyDetails", params={"editEntityDetails"})
+	public String editRelativeRow(
+			final int fileNo, EntityDetails entityDetails, RedirectAttributes redirectAttributes, 
+	        final HttpServletRequest req) {
+	    final Integer rowId = Integer.valueOf(req.getParameter("editEntityDetails"));
+	    entityDetails = entityDetailsService.findById(rowId);
+	    redirectAttributes.addFlashAttribute("fileNo",fileNo);
+		redirectAttributes.addFlashAttribute("entityDetails", entityDetails);
+	    return "redirect:/studentApplication/familyDetails";
+	}
+	
 	@RequestMapping(value="/familyDetails", params={"removeEntityDetails"})
-	public String removeRow(
-	        final StudentFile studentFile, final BindingResult bindingResult, 
+	public String removeRelativeRow(
+			final int fileNo, EntityDetails entityDetails, RedirectAttributes redirectAttributes, 
 	        final HttpServletRequest req) {
 	    final Integer rowId = Integer.valueOf(req.getParameter("removeEntityDetails"));
-	    studentFile.getEntityDetails().getRelatives().remove(rowId.intValue());
-	    return "familyDetails";
+	    entityDetailsService.delete(rowId);
+	    redirectAttributes.addFlashAttribute("fileNo",fileNo);
+		//redirectAttributes.addFlashAttribute("entityDetails", entityDetails);
+	    return "redirect:/studentApplication/familyDetails";
 	}
 	
 	@RequestMapping(value="/fragments/home", method = RequestMethod.GET)
@@ -169,7 +238,7 @@ public class StudentApplicationService {
 		        notifyService.addInfoMessage(studentFile.getEntityDetails().getFirstName() + "'s basic details saved successfully!!");
 	    	}
 	        //modelAndView.addObject("studentFile", studentFile);
-	        redirectAttributes.addFlashAttribute("studentFile", studentFile);
+	        redirectAttributes.addFlashAttribute("fileNo", studentFile.getFileNo());
 	        modelAndView.setViewName("redirect:/studentApplication/familyDetails");
 		}
         return modelAndView;
