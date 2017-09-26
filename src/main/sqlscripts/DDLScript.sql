@@ -44,7 +44,7 @@ CREATE TABLE Student_Entity_Details
         Place_Of_Birth VARCHAR(100),
         FOREIGN KEY (Entity_ID) REFERENCES Entity_Details(id)
 	);        
-----------------------------------------------------
+
 -- 21st Feb 2017
 Use tripleSDb;
 CREATE TABLE Entity_Bank_Details 
@@ -145,15 +145,16 @@ CREATE TABLE Student_Application
         FOREIGN KEY (File_ID) REFERENCES Student_File(id)
 	);
     
-----------------------------------------------------
+
 -- 16th Mar 2017    
+SET FOREIGN_KEY_CHECKS = 0;
 ALTER TABLE Student_File MODIFY COLUMN id INT AUTO_INCREMENT;
 ALTER TABLE Student_File AUTO_INCREMENT=1001;
 
 ALTER TABLE Entity_Details MODIFY COLUMN id INT AUTO_INCREMENT;
 ALTER TABLE Entity_Details AUTO_INCREMENT=1001;
 ALTER TABLE Entity_Details MODIFY Reference_Entity_ID INT NULL;
-----------------------------------------------------
+
 -- 26th Mar 2017
 Use tripleSDb;
 CREATE TABLE User
@@ -180,22 +181,22 @@ CREATE TABLE User_Role
         FOREIGN KEY (Role_ID) REFERENCES Role(id)
 	);
 
-----------------------------------------------------
+
 -- 03rd May 2017    
 ALTER TABLE User MODIFY COLUMN id INT AUTO_INCREMENT;
 ALTER TABLE Role MODIFY COLUMN id INT AUTO_INCREMENT;
 
-----------------------------------------------------
+
 -- 04th May 2017
 use triplesdb;
 ALTER TABLE user MODIFY COLUMN Password VARCHAR(70);
 
-----------------------------------------------------
+
 -- 07th May 2017
 use triplesdb;
 ALTER TABLE Student_File MODIFY COLUMN File_No INT;
 
-----------------------------------------------------
+
 -- 13th May 2017
 use triplesdb;
 ALTER TABLE Entity_Details ADD COLUMN Email_ID VARCHAR(100);
@@ -210,7 +211,7 @@ ALTER TABLE Entity_Details
     ON UPDATE CASCADE;
 ALTER TABLE Entity_Address_Details MODIFY COLUMN id INT AUTO_INCREMENT;
 
-----------------------------------------------------
+
 -- 14th May 2017
 ALTER TABLE Student_Entity_Details DROP FOREIGN KEY student_entity_details_ibfk_1;
 ALTER TABLE Student_Entity_Details DROP COLUMN Entity_ID;
@@ -230,7 +231,7 @@ ALTER TABLE Student_Entity_Details MODIFY COLUMN Got_Help_From_Other_Sources BIT
 ALTER TABLE Student_Entity_Details MODIFY COLUMN Have_Education_Loan BIT(1);
 ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_If_Other_Family_Members_Got_Help VARCHAR(1000);
 
-----------------------------------------------------
+
 -- 16th May 2017
 USE triplesdb;
 ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_Prize_Details VARCHAR(1000);
@@ -238,9 +239,13 @@ ALTER TABLE Student_Entity_Details MODIFY COLUMN Aim_In_Life VARCHAR(1000);
 ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_Job_Business_Details VARCHAR(1000);
 ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_Other_Problems_In_Family VARCHAR(1000);
 
-----------------------------------------------------
+
 -- 19th May 2017
 USE triplesdb;
 ALTER TABLE Entity_Details ADD COLUMN Age TINYINT UNSIGNED;
 ALTER TABLE Entity_Details MODIFY COLUMN Age INT UNSIGNED;
 ALTER TABLE Entity_Details ADD COLUMN Qualification VARCHAR(100);
+
+-- 26th Sept 2017
+USE triplesdb;
+SET FOREIGN_KEY_CHECKS = 1;
