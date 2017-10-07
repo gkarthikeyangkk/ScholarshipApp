@@ -188,17 +188,14 @@ ALTER TABLE Role MODIFY COLUMN id INT AUTO_INCREMENT;
 
 
 -- 04th May 2017
-use triplesdb;
-ALTER TABLE user MODIFY COLUMN Password VARCHAR(70);
+ALTER TABLE User MODIFY COLUMN Password VARCHAR(70);
 
 
 -- 07th May 2017
-use triplesdb;
 ALTER TABLE Student_File MODIFY COLUMN File_No INT;
 
 
 -- 13th May 2017
-use triplesdb;
 ALTER TABLE Entity_Details ADD COLUMN Email_ID VARCHAR(100);
 ALTER TABLE Entity_Address_Details CHANGE PinCode Pincode VARCHAR(10);
 ALTER TABLE Entity_Address_Details DROP FOREIGN KEY entity_address_details_ibfk_1;
@@ -233,7 +230,6 @@ ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_If_Other_Family_Member
 
 
 -- 16th May 2017
-USE triplesdb;
 ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_Prize_Details VARCHAR(1000);
 ALTER TABLE Student_Entity_Details MODIFY COLUMN Aim_In_Life VARCHAR(1000);
 ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_Job_Business_Details VARCHAR(1000);
@@ -241,11 +237,9 @@ ALTER TABLE Student_Entity_Details MODIFY COLUMN Describe_Other_Problems_In_Fami
 
 
 -- 19th May 2017
-USE triplesdb;
 ALTER TABLE Entity_Details ADD COLUMN Age TINYINT UNSIGNED;
 ALTER TABLE Entity_Details MODIFY COLUMN Age INT UNSIGNED;
 ALTER TABLE Entity_Details ADD COLUMN Qualification VARCHAR(100);
 
 -- 26th Sept 2017
-USE triplesdb;
 SET FOREIGN_KEY_CHECKS = 1;
