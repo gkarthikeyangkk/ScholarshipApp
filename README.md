@@ -12,10 +12,10 @@ Spring Boot Web App
 	3.	Note down the location in the windows file system where the project is imported
 	4.  	Go to Eclipe>File>Import> type Maven> Select "Existing Maven Projects"> Browse to the windows file system where you have kept the project imported from git > Click Finish
 	5.  	Maven project would be built. Right click on that project in Project Explorer. Click "Maven". Click "Update Project". Project would download all the dependencies.
-	6.	Right click again on the project. Click "Run As". Click "Maven clean"
-	7.	Right click again on the project. Click "Run As". Click "Maven install" to create jar file for this application
-	8.	Open ScholarshipAppApplication.java file located in src/main/java/com/tripleS path. Right click on the editor and select Run As "Java Application"
-	9.	Spring boot application would be seen as started in the console logs.
-	10. 	Go to http://localhost:8080/
+	6.	Open ScholarshipAppApplication.java file located in src/main/java/com/tripleS path. Right click on the editor and select Run As "Java Application"
+	7.	Spring boot application would be seen as started in the console logs.
+	8. 	Go to http://localhost:8080/
 	
-	
+## To create the jar file	
+	1.	Right click again on the project. Click "Run As". Click "Maven clean"
+	2.	Right click again on the project. Click "Run As". Click "Maven install" to create jar file for this application
