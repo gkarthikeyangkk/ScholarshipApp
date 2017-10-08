@@ -8,7 +8,7 @@ import com.tripleS.model.StudentFile;
 public interface StudentFileRepository extends JpaRepository<StudentFile, Integer> {
 	
 	@Query("Select MAX(s.fileNo) from StudentFile s")
-	int getMaxFileNo();
+	Integer getMaxFileNo();
 
 	StudentFile findByFileNo(int fileNo);
 }

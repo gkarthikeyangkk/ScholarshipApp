@@ -30,8 +30,11 @@ public class StudentFileServiceImpl implements StudentFileService {
 	@Override
 	public StudentFile save(StudentFile studentFile) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    	
-        studentFile.setFileNo(studentFileRepository.getMaxFileNo() + 1);
+		int maxFileNo = 0;
+		if(studentFileRepository.getMaxFileNo() != null) {
+			maxFileNo = studentFileRepository.getMaxFileNo().intValue();	
+    	}
+        studentFile.setFileNo(maxFileNo + 1);
         studentFile.setFileStatus("New");
         studentFile.setCreatedBy(auth.getName());
         studentFile.setCreatedDate(new Date());
