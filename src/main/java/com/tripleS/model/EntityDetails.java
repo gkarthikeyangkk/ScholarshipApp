@@ -16,81 +16,81 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="Entity_Details")
+@Table(name="entity_details")
 public class EntityDetails {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@Column(name="Entity_Type")
+	@Column(name="entity_type")
     private String type;
 	
-	@Column(name="Entity_Category")
+	@Column(name="entity_category")
     private String category;
 	
-	@Column(name="First_Name")
+	@Column(name="first_name")
 	@NotEmpty(message = "*Please provide first name")
     private String firstName;
 	
-	@Column(name="Middle_Name")
+	@Column(name="middle_name")
     private String middleName;
 	
-	@Column(name="Last_Name")
+	@Column(name="last_name")
     private String lastName;
 	
-	@Column(name="Full_Name")
+	@Column(name="full_name")
     private String fullName;
 	
-	@Column(name="Age")
+	@Column(name="age")
 	private Integer age;
 	
-	@Column(name="Telephone_No")
+	@Column(name="telephone_no")
     private String telephoneNo;
 	
-	@Column(name="Email_ID")
+	@Column(name="email_id")
 	@Email(message = "*Please provide a valid Email Address")
 	@NotEmpty(message = "*Please provide an email address")
 	private String emailID;
 	
-	@Column(name="Mobile_No")
+	@Column(name="mobile_no")
 	@Pattern(regexp="(^$|[0-9]{10})", message = "*Mobile number must be exactly 10 digits")
 	@NotEmpty(message = "*Please provide mobile number")
     private String mobileNo;
 	
-	@Column(name="Alternate_Contact_No")
+	@Column(name="alternate_contact_no")
 	@Pattern(regexp="(^$|[0-9]{10})", message = "*Alternate contact number must be exactly 10 digits")
     private String alternateContactNo;
 	
-	@Column(name="Qualification")
+	@Column(name="qualification")
 	private String qualification;
 	
-	@Column(name="Salary_Per_Month")
+	@Column(name="salary_per_month")
     private BigDecimal salaryPerMonth;
 	
-	@Column(name="Occupation_Profession")
+	@Column(name="occupation_profession")
     private String occupationProfession;
 	
-	@Column(name="Education_Loan_Amount")
+	@Column(name="education_loan_amount")
     private BigDecimal educationLoanAmount;
 	
-	@Column(name="Help_Amount")
+	@Column(name="help_amount")
     private BigDecimal helpAmount;
 
 	@ManyToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="Reference_Entity_ID")
+	@JoinColumn(name="reference_entity_id")
     private EntityDetails applicant;
 	
 	@OneToOne(mappedBy = "entityDetails")
 	private StudentFile studentFile;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Address_ID")
+    @JoinColumn(name = "address_id")
 	@Valid
     private EntityAddressDetails entityAddressDetails;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Student_ID")
+    @JoinColumn(name = "student_id")
 	@Valid
     private StudentDetails studentDetails;
 	

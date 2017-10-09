@@ -8,37 +8,37 @@ import javax.validation.Valid;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="Student_File")
+@Table(name="student_file")
 public class StudentFile {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@Column(name="File_No")
+	@Column(name="file_no")
     private int fileNo;
 	
-	@Column(name="File_Status")
+	@Column(name="file_status")
 	//@NotEmpty(message="*File status cannot be empty")
     private String fileStatus;
 	
-	@Column(name="Created_By")
+	@Column(name="created_by")
 	//@NotEmpty(message="*Created By cannot be empty")
     private String createdBy;
 	
-	@Column(name="Interviewed_By")
+	@Column(name="interviewed_by")
     private String interviewedBy;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name="Created_Date")
+	@Column(name="created_date")
     private Date createdDate;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name="Interviewed_Date")
+	@Column(name="interviewed_date")
     private Date interviewedDate;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Entity_ID")
+    @JoinColumn(name = "entity_id")
 	@Valid
     private EntityDetails entityDetails;
     

@@ -12,36 +12,36 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="Entity_Address_Details")
+@Table(name="entity_address_details")
 public class EntityAddressDetails {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@Column(name="Address_Type")
+	@Column(name="address_type")
     private String type;
 	
-	@Column(name="Address_Line1")
+	@Column(name="address_line1")
 	@NotEmpty(message = "*Please provide Address Line 1")
     private String addressLine1;
 	
-	@Column(name="Address_Line2")
+	@Column(name="address_line2")
     private String addressLine2;
 	
-	@Column(name="City")
+	@Column(name="city")
 	@NotEmpty(message = "*Please provide City")
     private String city;
 	
-	@Column(name="State")
+	@Column(name="state")
 	@NotEmpty(message = "*Please provide State")
     private String state;
 	
-	@Column(name="Country")
+	@Column(name="country")
 	@NotEmpty(message = "*Please provide Country")
     private String country;
 	
-	@Column(name="Pincode")
+	@Column(name="pincode")
 	@Pattern(regexp="(^$|[0-9]{6})", message = "*Pincode must be exactly 6 digits")
 	@NotEmpty(message = "*Please provide Pincode")
     private String pincode;

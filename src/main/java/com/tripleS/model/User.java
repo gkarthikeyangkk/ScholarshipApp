@@ -10,25 +10,25 @@ import java.sql.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 	
-	@Column(name="First_Name")
+	@Column(name="first_name")
 	@NotEmpty(message = "*Please provide your first name")
     private String firstName;
 	
-	@Column(name="Last_Name")
+	@Column(name="last_name")
 	@NotEmpty(message = "*Please provide your last name")
     private String lastName;
 	
-	@Column(name="Display_User_Name")
+	@Column(name="display_user_name")
     private String displayUserName;
 	
-	@Column(name="Password")
+	@Column(name="password")
 	@Length(min = 5, message = "*Your password must have at least 5 characters")
 	@NotEmpty(message = "*Please provide your password")
     private String password;
@@ -36,19 +36,19 @@ public class User {
 	/*@Transient
     private String passwordConfirm;*/
 	
-	@Column(name="Email_ID")
+	@Column(name="email_id")
 	@Email(message = "*Please provide a valid Email")
 	@NotEmpty(message = "*Please provide an email")
     private String emailID;
 	
-	@Column(name="Mobile_No")
+	@Column(name="mobile_no")
     private String mobileNo;
 	
-	@Column(name="Created_Date")
+	@Column(name="created_date")
     private Date createdDate;
 	
 	@ManyToMany
-    @JoinTable(name = "User_Role", joinColumns = @JoinColumn(name = "User_id"), inverseJoinColumns = @JoinColumn(name = "Role_id"))
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     public int getId() {

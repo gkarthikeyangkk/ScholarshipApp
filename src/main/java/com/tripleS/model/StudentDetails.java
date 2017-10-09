@@ -17,49 +17,49 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="Student_Entity_Details")
+@Table(name="student_entity_details")
 public class StudentDetails {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@Column(name="Mother_Tongue")
+	@Column(name="mother_tongue")
 	@NotEmpty(message = "*Please provide mother tongue")
     private String motherTongue;
 	
-	@Column(name="Religion")
+	@Column(name="religion")
 	@NotEmpty(message = "*Please provide religion")
     private String religion;
 	
-	@Column(name="Describe_Prize_Details")
+	@Column(name="describe_prize_details")
     private String describePrizeDetails;
 	
-	@Column(name="Aim_In_Life")
+	@Column(name="aim_in_life")
     private String aimInLife;
 	
-	@Column(name="Describe_Job_Business_Details")
+	@Column(name="describe_job_business_details")
     private String describeJobBusinessDetails;
 	
-	@Column(name="Describe_Other_Problems_In_Family")
+	@Column(name="describe_other_problems_in_family")
     private String describeOtherProblemsInFamily;
 	
-	@Column(name="Got_Help_From_Other_Sources")
+	@Column(name="got_help_from_other_sources")
     private Boolean gotHelpFromOtherSources;
 	
-	@Column(name="Have_Education_Loan")
+	@Column(name="have_education_loan")
     private Boolean haveEducationLoan;
 	
-	@Column(name="Describe_If_Other_Family_Members_Got_Help")
+	@Column(name="describe_if_other_family_members_got_help")
     private String describeIfOtherFamilyMembersGotHelp;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name="Date_Of_Birth")
+	@Column(name="date_of_birth")
 	//@DateTimeFormat(pattern = "dd/MM/yyyy")
 	//@NotNull(message = "*Please provide date of birth")
     private Date dateOfBirth;
 	
-	@Column(name="Place_Of_Birth")
+	@Column(name="place_of_birth")
 	@NotEmpty(message = "*Please provide place of birth")
     private String placeOfBirth;
 	
