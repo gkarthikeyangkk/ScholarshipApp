@@ -1,7 +1,10 @@
 package com.tripleS.service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,11 +33,12 @@ public class StudentFileServiceImpl implements StudentFileService {
 	@Override
 	public StudentFile save(StudentFile studentFile) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		int maxFileNo = 0;
-		if(studentFileRepository.getMaxFileNo() != null) {
-			maxFileNo = studentFileRepository.getMaxFileNo().intValue();	
+
+		String generatedFileId = generateFileId();
+		while(studentFileRepository.checkIfExists(generatedFileId) > 0) {
+			generatedFileId = generateFileId();
     	}
-        studentFile.setFileNo(maxFileNo + 1);
+        studentFile.setFileNo(generatedFileId);
         studentFile.setFileStatus("New");
         studentFile.setCreatedBy(auth.getName());
         studentFile.setCreatedDate(new Date());
@@ -43,5 +47,21 @@ public class StudentFileServiceImpl implements StudentFileService {
         studentFile = studentFileRepository.save(studentFile);
 		return studentFile;
 	}
+	
+	private String generateFileId(){
+		String fileId = new String(RandomStringUtils.randomAlphanumeric(18).toUpperCase());
+		return fileId;
+        /*MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(fileId.getBytes());
+
+        byte byteData[] = md.digest();
+
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < byteData.length; i++) {
+         sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+        }
+    	return fileId;*/
+	}
+	
 
 }

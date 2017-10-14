@@ -8,7 +8,7 @@ import javax.validation.Valid;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="student_file")
+@Table(name="student_file_test")
 public class StudentFile {
 	
 	@Id
@@ -16,7 +16,7 @@ public class StudentFile {
 	private int id;
 	
 	@Column(name="file_no")
-    private int fileNo;
+    private String fileNo;
 	
 	@Column(name="file_status")
 	//@NotEmpty(message="*File status cannot be empty")
@@ -48,10 +48,10 @@ public class StudentFile {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getFileNo() {
+	public String getFileNo() {
 		return fileNo;
 	}
-	public void setFileNo(int fileNo) {
+	public void setFileNo(String fileNo) {
 		this.fileNo = fileNo;
 	}
 	public String getFileStatus() {
